@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = "https";
+const API_BASE = "http://localhost:3000";  // Update to the correct base URL
 
 export const Home = () => {
   const [todos, setTodos] = useState([]);
@@ -12,13 +12,14 @@ export const Home = () => {
   }, []);
 
   const GetTodos = () => {
-    fetch("")      .then(res => res.json())
+    fetch(`${API_BASE}/api/todos/get-todos`)
+      .then(res => res.json())
       .then(data => setTodos(data))
       .catch(err => console.error("Error:", err));
   }
 
   const completeTodo = async id => {
-    const data = await fetch( id)
+    const data = await fetch(`${API_BASE}/api/todos/get-todo/${id}`)
       .then(res => res.json());
 
     setTodos(todos => todos.map(todo => {
@@ -31,7 +32,7 @@ export const Home = () => {
   }
 
   const deleteTodo = async id => {
-    const data = await fetch(`${id}`, {
+    const data = await fetch(`${API_BASE}/api/todos/delete-todo/${id}`, {
       method: "DELETE"
     }).then(res => res.json());
 
@@ -39,13 +40,13 @@ export const Home = () => {
   }
 
   const addTodo = async () => {
-    const data = await fetch("", {
+    const data = await fetch(`${API_BASE}/api/todos/create-todo`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: newTodo
+        todo: newTodo  // Ensure the field name matches what your backend expects
       })
     }).then(res => res.json());
 
@@ -65,10 +66,14 @@ export const Home = () => {
           mb-12 ${todo.complete ? "opacity-70" : ""}`} key={todo._id} onClick={() => completeTodo(todo._id)}>
             <div className={`checkbox w-5 h-5 mr-4 rounded-full transition-colors 
             ${todo.complete ? "bg-gradient-to-b from-primary to-secondary" : "bg-dark-alt"}`}></div>
-            <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.text}</div>
+            <div className="flex flex-col gap-2">
+            <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div>
+            <div className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleString()}</div>
+            </div>
+          
             <div className="delete_todo absolute top-1/2 right-2 transform -translate-y-1/2 
             font-bold w-6 h-6 text-light bg-red-700 rounded-full flex items-center justify-center" 
-            onClick={() => deleteTodo(todo._id)}>
+            onClick={(e) => { e.stopPropagation(); deleteTodo(todo._id); }}> 
                 x
             </div>
           </div>
