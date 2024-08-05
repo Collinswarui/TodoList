@@ -32,12 +32,22 @@ export const Home = () => {
   }
 
   const deleteTodo = async id => {
-    const data = await fetch(`${API_BASE}/api/todos/delete-todo/${id}`, {
-      method: "DELETE"
-    }).then(res => res.json());
+    try {
+      const res = await fetch(`${API_BASE}/api/todos/delete-todo/${id}`, {
+        method: "DELETE"
+      });
 
-    setTodos(todos => todos.filter(todo => todo._id !== data._id));
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status} ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setTodos(todos => todos.filter(todo => todo._id !== data._id));
+    } catch (err) {
+      console.error(err);
+    }
   }
+
 
   const addTodo = async () => {
     const data = await fetch(`${API_BASE}/api/todos/create-todo`, {
@@ -62,18 +72,18 @@ export const Home = () => {
 
       <div className="todos grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {todos.length > 0 ? todos.map(todo => (
-          <div className={`todo bg-dark p-4 rounded-xl flex items-center transition-opacity cursor-pointer 
+          <div className={`todo bg-dark p-4 rounded-xl flex items-center justify-between transition-opacity cursor-pointer 
           mb-12 ${todo.complete ? "opacity-70" : ""}`} key={todo._id} onClick={() => completeTodo(todo._id)}>
-            <div className={`checkbox w-5 h-5 mr-4 rounded-full transition-colors 
-            ${todo.complete ? "bg-gradient-to-b from-primary to-secondary" : "bg-dark-alt"}`}></div>
-            <div className="flex flex-col gap-2">
-            <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div>
-            <div className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleString()}</div>
+            <div className="flex items-center">
+              <div className={`checkbox w-5 h-5 mr-4 rounded-full transition-colors 
+              ${todo.complete ? "bg-gradient-to-b from-primary to-secondary" : "bg-dark-alt"}`}></div>
+              <div className="flex flex-col">
+                <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div> {/* Ensure field matches backend */}
+                <div className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleString()}</div>
+              </div>
             </div>
-          
-            <div className="delete_todo absolute top-1/2 right-2 transform -translate-y-1/2 
-            font-bold w-6 h-6 text-light bg-red-700 rounded-full flex items-center justify-center" 
-            onClick={(e) => { e.stopPropagation(); deleteTodo(todo._id); }}> 
+            <div className="delete_todo font-bold w-6 h-6 text-light bg-red-700 rounded-full flex items-center justify-center" 
+            onClick={(e) => { e.stopPropagation(); deleteTodo(todo._id); }}> {/* Prevent completeTodo from being called */}
                 x
             </div>
           </div>

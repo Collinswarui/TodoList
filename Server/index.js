@@ -12,9 +12,7 @@ dotenv.config();
 mongoose.set('debug', true);
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI, {
-    serverSelectionTimeoutMS: 30000, // 30 seconds
-  })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
       console.log("Connected to DB!!");
     })
