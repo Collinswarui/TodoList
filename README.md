@@ -44,3 +44,18 @@ npm run dev
 
 # The application should now be running at  http://localhost:5173/  fot the frontend and  http://localhost:3000/  for the backend
 
+
+# Usage
+# Adding a Todo
+Click the + button at the bottom right of the screen to open the popup, enter your todo, and click
+"Add Task".
+
+# Marking a Todo as Complete
+Click on the todo item to mark it as complete.
+
+# Editing a Todo
+Click the pen icon on the right of a todo item to open the edit popup, change the text, and click
+"Update Task".
+
+# Deleting a Todo
+Click the x button on the right of a todo item to delete it.
