@@ -102,7 +102,7 @@ export const Home = () => {
           <div className={`todo bg-dark p-4 rounded-xl flex items-center justify-between transition-opacity cursor-pointer 
           mb-12 ${todo.complete ? "opacity-70" : ""}`} key={todo._id} onClick={() => completeTodo(todo._id)}>
             <div className="flex items-center">
-              <div className={`checkbox w-8 h-8 mr-4 rounded-full transition-colors 
+              <div className={`checkbox w-6 h-6 mr-4 rounded-full transition-colors 
               ${todo.complete ? "bg-gradient-to-b from-primary to-secondary" : "bg-dark-alt"}`}></div>
               <div className="flex flex-col">
                 <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div> {/* Ensure field matches backend */}
