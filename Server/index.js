@@ -7,9 +7,7 @@ import cors from 'cors';
 
 dotenv.config();
 
-// console.log('Mongo_URI: ', process.env.MONGO_URI);
 
-mongoose.set('debug', true);
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)

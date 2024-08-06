@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = "http://localhost:3000";  // Update to the correct base URL
-
+const API_BASE = "http://localhost:3000";  
 export const Home = () => {
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
@@ -57,7 +56,7 @@ export const Home = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        todo: newTodo  // Ensure the field name matches what your backend expects
+        todo: newTodo 
       })
     }).then(res => res.json());
 
@@ -105,17 +104,17 @@ export const Home = () => {
               <div className={`checkbox w-6 h-6 mr-4 rounded-full transition-colors 
               ${todo.complete ? "bg-gradient-to-b from-primary to-secondary" : "bg-dark-alt"}`}></div>
               <div className="flex flex-col">
-                <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div> {/* Ensure field matches backend */}
+                <div className={`text text-xl ${todo.complete ? "line-through" : ""}`}>{todo.todo}</div> 
                 <div className="text-sm text-gray-500">{new Date(todo.createdAt).toLocaleString()}</div>
               </div>
             </div>
             <div className="flex flex-col gap-3 items-center">
             <div className="delete_todo font-bold w-6 h-6 text-light bg-red-700 rounded-full  flex items-center justify-center" 
-            onClick={(e) => { e.stopPropagation(); deleteTodo(todo._id); }}> {/* Prevent completeTodo from being called */}
+            onClick={(e) => { e.stopPropagation(); deleteTodo(todo._id); }}> 
                 x
             </div>
             <div className="edit_todo font-bold w-6 h-6 text-light bg-blue-700 rounded-full flex items-center justify-center" 
-              onClick={(e) => { e.stopPropagation(); openEditPopup(todo); }}> {/* Prevent completeTodo from being called */}
+              onClick={(e) => { e.stopPropagation(); openEditPopup(todo); }}> 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>

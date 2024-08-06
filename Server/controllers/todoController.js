@@ -9,7 +9,7 @@ const createTodo = async (req, res) => {
 
     const todo = new Todo({
       todo: req.body.todo,
-      createdAt: new Date(), // Ensure the creation date is set
+      createdAt: new Date(), 
     });
 
     await todo.save();
@@ -77,7 +77,7 @@ const updateTodo = async (req, res) => {
       return res.status(404).json({ message: "Todo not found" });
     }
 
-    updatedTodo.todo = req.body.todo; // Ensure the correct field is updated
+    updatedTodo.todo = req.body.todo; 
 
     await updatedTodo.save();
 
