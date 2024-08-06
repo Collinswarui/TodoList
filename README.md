@@ -20,7 +20,7 @@ To get a local copy up and running, follow these simple steps:
 
 # Backend Setup
 Clone the repository:
-git clone https://github.com/your-username/todo-app.git
+git clone git@github.com:Collinswarui/TodoList.git
 
 Install NPM packages on the root folder:
 npm install
