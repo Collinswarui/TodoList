@@ -26,7 +26,6 @@ Install NPM packages on the root folder:
 npm install
 
 Create a .env file in the root directory and add the following content:
-MONGO_URI=mongodb+srv://collinswanjiru47:sBHPg51cvNkDdTcP@todos.mjcvmvt.mongodb.net/Todos?retryWrites=true&w=majority&appName=TodosStart the backend server:
 
 start the server
 npm run start
