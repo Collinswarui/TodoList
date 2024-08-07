@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/todos', todoRouter);
 
-const port = 3000;
+const port = 3007;
 app.listen(
     port, () => console.log(`Server running on port ${port}`)
 );
