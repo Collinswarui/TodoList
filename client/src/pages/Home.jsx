@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = "http://localhost:3000";  
+const API_BASE = "http://localhost:3001";  
 export const Home = () => {
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
@@ -50,7 +50,7 @@ export const Home = () => {
 
 
   const addTodo = async () => {
-    const data = await fetch(`${API_BASE}/api/todos/create-todo`, {
+    const data = await fetch(`${API_BASE}/todos/create-todo`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -71,11 +71,11 @@ export const Home = () => {
     setNewTodo(todo.todo);
   }
 
-  const updateTodo = async () => {
+  const updateTodoS = async () => {
     if(!editTodo) return;
 
     const data = await fetch(`/api/todos/update-todo/${editTodo._id}`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": 'application/json'
       },

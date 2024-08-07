@@ -9,7 +9,6 @@ const createTodo = async (req, res) => {
 
     const todo = new Todo({
       todo: req.body.todo,
-      createdAt: new Date(), 
     });
 
     await todo.save();
